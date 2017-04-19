@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        var obj=[];
+
+        window.onload = function () {
+            var  arr = JSON.parse(localStorage.getItem("todo"));
+            console.log(arr);
+            var maxId = -1;
+            if(arr.length!=0){
+                var toBePainted="";
+                var dv = document.getElementById("div1");
+                arr.forEach(function (obj,index) {
+                    var str = (arr[arr.length-index-1])["task"]
+                    toBePainted = str + toBePainted;
+                    console.log(parseInt(obj.taskID))
+                    if(maxId < parseInt(obj.taskID)){
+                        maxId = parseInt(obj.taskID);
+                    }
+                })
+
+                    dv.innerHTML = toBePainted;
+            }else{
+                localStorage.setItem("todo",JSON.stringify(obj));
+            }
+
+            var list = "";
+            var button = document.getElementById("btn");
+            var clr = document.getElementById("clearbtn");
+            var input = document.getElementById("in");
+            var clrAll = document.getElementById("clear");
+            var cnt = maxId+1;
+
+            button.onclick = function () {
+//                var arr = JSON.parse(localStorage.getItem("todo"));
+//                if(arr.childElementCount != 0){
+//                    var dv = document.getElementById("div1");
+//
+//                    arr.forEach(function(obj,index){
+//                        var toBeAdded = JSON.parse(obj.task);
+//                        dv.innerHTML += toBeAdded;
+//                    })
+//                }
+
+                var task = input.value;
+                if(task == "" || task == "Enter some value" ){
+                    input.value = "Enter some value";
+                }else {
+                    var dv = document.getElementById("div1");
+//                    dv.innerHTML += "<li id='" + cnt + "' onclick='strike(this)'>" + task + "</li> <input type='button' value='done' onclick='strikeB("+cnt+")'>";
+                   var toBeAdded = "<li id='"+cnt+"'><input type='checkbox' onclick='strikethrough(this.nextElementSibling)' > <span>" + task + "</span><input type='button' value='done' onclick='remove(this.previousElementSibling )'></li>";
+                    dv.innerHTML += toBeAdded;
+                    var obj = JSON.parse(localStorage.getItem("todo"));
+                    obj.push({taskID:cnt,task:toBeAdded,done:false});
+                    localStorage.setItem("todo",JSON.stringify(obj));
+                  //  console.log(localStorage.getItem("todo"));
+                    // dv.innerHTML += "<li id='" + cnt + "' onclick='strike(this)'>" + task + "<input type='button' value='done' onclick='strikeB("+cnt+")'></li>";
+                    input.value = "";
+                    cnt++;
+                }
+            }
+            var checkLineThrough=function(item,index,list){
+                if(index==0){
+                    return;
+                }
+                //var textstyle = item.firstElementChild.nextElementSibling.style.textDecoration;
+                var textstyle = item.firstElementChild.checked;
+
+                if(textstyle == true || item.firstElementChild.nextElementSibling.style.textDecoration=="line-through"){
+                        item.remove();
+                    }
+
+
+            }
+            var constructNewList= function (item,index){
+                if(index==0){
+                    return;
+                }
+
+                console.log(item.innerHTML);
+                if(item.firstElementChild.nextElementSibling.style.textDecoration=="line-through"){
+                    return "";
+                }else{
+                    return item.innerHTML;
+                }
+
+            }
+
+            clr.onclick = function () {
+                var li = document.getElementById('div1');
+                //var e = div1.getElementsByTagName('li');
+                //var e = div1.getElementsByClassName('item'); // li ko class dedo item
+                var e = li.childNodes;
+                var str=""
+                console.log(str);
+                str += e.forEach(constructNewList);
+
+            }
+
+            clrAll.onclick = function () {
+                var ul = document.getElementById('div1');
+                ul.innerHTML ="<div id='div1'> </div>"
+                var obj = [];
+                localStorage.setItem("todo",JSON.stringify(obj.toString()));
+            }
+
+
+            input.onclick=function () {
+                input.value = "";
+            }
+//            var ul = document.getElementById('list');
+//            ul.onclick = function(event) {
+//                var target = getEventTarget(event);
+//                target.style.textDecoration = "line-through";
+//            };
+            tick();
+        }
+        function tick() {
+            var arr = JSON.parse(localStorage.getItem('todo'));
+            arr.forEach(function (obj,index) {
+                if (obj.done == true) {
+                    console.log(typeof(""+obj.taskID));
+                    console.log(obj);
+                    var e = document.getElementById(""+obj.taskID);
+                    console.log(e);
+                    e.firstElementChild.nextElementSibling.style.textDecoration = "line-through";
+                    e.firstElementChild.nextElementSibling.nextElementSibling.checked = true;
+                }
+            })
+        }
+
+        function strikethrough(element) {
+            var o = JSON.parse(localStorage.getItem("todo"));
+            var node;
+            o.forEach(function (e,index) {
+                if(document.getElementById(e["taskID"]+"")==element.parentNode){
+                    node = e;
+                }
+            })
+            if(element.style.textDecoration == "line-through"){
+                element.style.textDecoration = "none";
+                element.previousElementSibling.checked = false;
+                node["done"] = false;
+            }else {
+                element.style.textDecoration = "line-through";
+                element.previousElementSibling.checked = true;
+                node["done"] = true;
+            }
+            localStorage.setItem("todo",JSON.stringify(o));
+        }
+
+        function remove(element) {
+            if(element.style.textDecoration == "line-through"){
+                var obj = JSON.parse(localStorage.getItem("todo"));
+              //  console.log(obj);
+                obj.forEach(function (e,index) {
+                    //console.log(e["taskID"])
+                    //console.log(document.getElementById(e["taskID"]));
+                    if(document.getElementById(e["taskID"]+"")==element.parentNode || document.getElementById(e["taskID"]+"")==null){
+                        console.log("splice: " + obj.splice(index,1));
+                    }
+
+                })
+                localStorage.setItem("todo",JSON.stringify(obj));
+                element.parentNode.remove();
+            }else {
+                window.alert("Task is not Striked through");
+            }
+//            if(element.previousElementSibling.style.textDecoration == "line-through") {
+//                element.parentNode.remove();
+//            }else{
+//                window.alert("Task is not Striked through");
+//            }
+        }
+
+        function strike(element){
+            if(element.style.textDecoration == "line-through"){
+                element.style.textDecoration = "none";
+            }else {
+                element.style.textDecoration = "line-through";
+            }
+        }
+        function strikeB(id){
+            var str=id+"";
+            var element = document.getElementById(str);
+            if(element.style.textDecoration == "line-through"){
+                element.style.textDecoration = "none";
+            }else {
+                element.style.textDecoration = "line-through";
+            }
+        }
+
+//        function getEventTarget(e) {
+//            e = e || window.event;
+//            return e.target || e.srcElement;
+//        }
+
+
+        function handle(e){
+            var button = document.getElementById("btn");
+            var input = document.getElementById("in");
+
+//            if(e.keyCode === 8){
+//                input.value="";
+//            }else
+                if(e.keyCode === 13){
+                button.onclick();
+            }
+        }
+    </script>
+</head>
+<body>
+
+<input id="in" type="text" onkeypress="handle(event)" >
+<input id = "btn" type="button" value="Add to List">
+<input id = "clearbtn" type="button" value="Clear Done Tasks">
+<ul id="list">
+<div id="div1">
+</div>
+</ul>
+<br>
+<input type = "button" value = "ClearAll" id="clear">
+
+</body>
+</html>

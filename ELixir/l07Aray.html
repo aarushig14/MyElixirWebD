@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        function increament(item, index, array) {
+        //       a[index] = item + 1;  //a not defined
+            array[index] = item + 1;
+        //       return item+1;//undefined
+        }
+        function mapfun(item, index, array){
+            return array[array.length-index -1 ];
+        }
+
+        var redfun = function (accumulator,item,index,array){
+//               if(index==0){
+//                   accumulator=""
+//               }
+//            No Need of checking as iteration starts from index(1) and index(0) value is already present in accumulator
+
+
+                console.log(accumulator +" index: "+ index +" item: "+item);
+                return accumulator+""+item;
+        }
+
+        window.onload=function () {
+            a = [1, 2, 3, 4, 5];
+            b = a.forEach(increament);
+            //console.log(b);  // b undefined
+            b = a.map(mapfun);
+            c= a.reduce(redfun);
+        }
+
+
+
+    </script>
+</head>
+<body>
+
+
+</body>
+</html>

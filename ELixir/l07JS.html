@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+
+<script>
+//---------(4)----------    Variabale Hoisting (only var and function not assignment)
+//var a;
+//function fun() {
+//     console.log(a);
+// }
+//    fun();
+//    a=10;  // does not get hoisted
+ //var a=10;      //pehle refresh hone par pura page execute hua fir fun() call kiya
+
+    //  ------------------(3)---------------------------------------------------
+//    var fun = function(){
+//        var a = 10;   // makes a global variable
+//        b = 20;
+//        console.log(a);
+//        console.log(b);
+//    }
+//    fun();
+//    console.log("Printing a outside" + a); // will work
+//    console.log(("Printing b outside" + b));  // will give error
+
+
+//    ----------------------(2)---------------------
+//    var a = [ 1,2,3,"as"];
+//    var obj = {key1:1,key2:"asdgfg",key3:true,key4:{a:"nest"},key5:function(){console.log(obj.key1);}};
+
+
+
+
+//  ------------------(1)---------------------------------------------------
+//    var a=10;
+//
+//    var fun=function (){
+//    console.log(a);
+//    }
+//
+//    var fun1 = function(rand){
+//        console.log(rand);
+//        rand();                 //error if rand is not a function
+//        return "aabc";
+//
+//    }
+//
+//    function fun2(){
+//        console.log(a);
+//    }
+
+    console.log(b);
+
+</script>
+
+<script>
+
+    // ---(3)---
+//    var fun2 = function () {
+//        a = 30;
+//
+//    }
+//    fun2()
+//    console.log(a);
+   // console.log(b);
+console.log(20);
+    var b=10;
+
+</script>
+
+<body>
+
+
+<H1> HELLO</H1>
+
+</body>
+</html>

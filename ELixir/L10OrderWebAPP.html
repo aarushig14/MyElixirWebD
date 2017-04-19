@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+
+window.onload = function () {
+    
+    
+    var btns = document.getElementsByTagName('input');
+    console.log(btns);
+    btns.forEach(function (item,index,arr) {
+        if(item.id != 'cart'){
+           arr[index].onclick = addit(this); 
+        }
+    })
+    
+    var addit = function (element) {
+        var items = localStorage.getItem('cart');
+        if(!items){
+            items = [];
+        }
+        items.push(element.id);
+        localStorage.setItem('cart',JSON.stringify(items));
+        var cart = document.getElementById('cart');
+        cart.value = cart.value+1;
+    }
+}
+
+function create(imgsrc,imgid,btnvalue,item) {
+    var div = document.createElement('div');
+    var img = document.createElement('img');
+    img.id = imgid;
+    img.src = imgsrc;
+    div.appendChild(img);
+    var h1 = document.createElement('h1')
+    h1.innerHTML = item;
+    div.appendChild(h1);
+    var btn = document.createElement('button');
+
+
+}
+
+    </script>
+
+    <style>
+        .navbar{
+            height: 20%;
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+        }
+        .container{
+            display : flex;
+            height : 99%;
+            width:70%;
+            margin: auto;
+            justify-content: space-around;
+            flex-direction: row;
+            flex-wrap: wrap;
+            position: absolute;
+            padding-left: 15%;
+        }
+
+        .course{
+            display: flex;
+            margin: 20px;
+            width: 250px;
+            height: 250px;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            padding: 1%;
+        }
+        .alt{
+            background-color: beige;
+        }
+        h1{
+            font-size: 30px;
+            font-weight: 200;
+            font-variant-caps: all-petite-caps;
+        }
+        div img{
+            width:180px;
+            height: 180px;
+        }
+        .cart{
+            width: 28px;
+            height: 28px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <h1>Order Online APP</h1>
+   <div> <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAHsAAAB7CAMAAABjGQ9NAAAAY1BMVEX///8AAAAgICC7u7vn5+fR0dGMjIyEhIQxMTHNzc3X19cTExPy8vJLS0vCwsL39/cNDQ0bGxteXl6ioqI+Pj5paWlERESamppkZGRTU1NycnKUlJTg4OAlJSVZWVmrq6t8fHw6AMzcAAAEvklEQVRoge1a6ZKzKhAVdx33JGqMifP+T3k1sftTaQOiQ9Wt8vwLGg40vaNhnDhx4sSJEyf+x4hm0EhsV0U8Q92lmqijF+PgaeKueGrGEj3cPsV908N9pbivoRbumuJmnRbukOQu9Fhacv/JEMBtBlq4DTtIEB2wu3q4p0Br/9HPbXQgdUs/dwg2V+jnNm4jt6/HxGcIQOiVfu4IhF521sEIhE7DQxs/Gn4t8hoOOpg/QPudO72Jp1BGLdh4J55CGb6AOyTD6jG4CrgN9++4hdlY8vNn3EKHFcV/Re2L04LL+OpKFLf7teU2P+74K8qUQlL4EFIbLazzl8zU7TtjGZHKWjljd+oP1jhdLhMcIYpTu+vPZMjxiGkuvZ401B/AVZYC1/KGIKD89k8u3GjqrkjVBpF7MgVPW45vP8nHAwmfVKXD9qgEF3aSyWW/IKXMoZ4+GGWp6S99FOgvJFMCB8W0xs0fbNTQ3FExzvWSov6o04CYUo+hhuPLpjc3of7oqmQLDjDxnPrD8JDP54b95QQ3TMVk6w0bojhl4la/k5gbb3uX4/P6gSKPJakNowFtIxQkePYRiTP9sNeRkn+7hV3wVrmGbybe9ixPnrtf0YuXK4j8KV9m2RBQzIe7hGcOh7EcHSTle8vRB7iKO+kjaaCKHASJOIJwyI6EMigLWEXUiCfcgC0i/xf5WOwtMWR0r8WYG1OvNvk4CRng1jf+hL9xpkwGsiEGcEZhgYVtrGtB6DlnHWQg631Ixi0I4ki+sV+I6Qunoh0lxCuRmKClbhN5L/Q7kC+fJIxw6P2YuVTmQFHkkwqFm5IR7pkRvgtDt0y2NANWKMuA6fRj5fIEGRFKQHK3ze3hdyYy4LmYc5U75N97Q6FXCBay1N8w4wOZzfhEtFtZuwywCVHP41P7pPe4dF4ocpU2JZrnXNuiktfpwQ3W83NoISQodQptODAvmKHnzh7OdMQZ3FoRckO0c5ICmvgecGoph0OaEFtC9wTtEfWwYlM69cRTi1CqNuOtXDy5AFvjCMLerW2Zekt6d84oVfnSSHH9SszXas/VC2p6aCtg36UPVijyRc1hQG0TNgWPxz8T13RxNUW4KxztAzYhysTZgvaIe3QIKJm/CeVtl329Ye/w6d6mMoyDtaufXiqkaohg5/3JVd06gqd4+u9QvuWzC/HkItSK+m6JpxZD8dONicQnNxnZzwoy8nXJZuYCWAbnVRBa+G1E6YQkEmgqscYKE9ccf5ibK8EB2Np8xzAbru3onn6/VNjsp1VRbW/rTQCth7GoSeAIVlQXw+3neQpiUAoEIOXHR1WxjSDghvYiOESlj5SA2/1w432CgDsez+R3DzfIfKxDMWFe4cZ6+/Mcy1glmWNJ9E42Q+yxruhaCPpwHdaK3UHJi5IFIuBmdWc9sMu5dpUc4f319WFd8Os0vucshUllMPEbq/u4ZNTrioVJwgjEqykBKuMMimEU2z1TfPHPlP9X/gyw5eux6ltc4tdaqKcu7TJ3oC9oAdHycwniCkUe9qyRbgrt5WJOXs+afeli1KHcTU8iA0oaYM8Ka3eebCdu/boXTeVITZU61e11f91c8Zc8ktg4j64PbE+cOHHixIkTevAfC3ZAZJPFqEYAAAAASUVORK5CYII=" class="cart">
+       <input type="button" value="0" id="cart" ></div>
+</div>
+
+<div class="container">
+    <div class="course">
+        <img src="https://rukminim1.flixcart.com/image/400/400/computer/q/j/y/lenovo-ideapad-original-imaezxn6hnwhzajd.jpeg?q=70" >
+        <h1>HCL Computer</h1>
+        <input type="button" value="Add to Cart" onclick="addit(this)" id="1">
+    </div>
+    <div class="course alt">
+        <img src="https://rukminim1.flixcart.com/image/400/400/air-conditioner-new/z/h/n/2-hitachi-split-rau323hwds-original-imaegyzhw7kn6k76.jpeg?q=70" >
+        <h1>Air Condition</h1>
+        <input type="button" value="Add to Cart" id="2">
+    </div>
+    <div class="course">
+        <img src="https://rukminim1.flixcart.com/image/400/400/speaker/mobile-tablet-speaker/c/h/v/philips-bt64a-original-imaejmjhtem9kneq.jpeg?q=70" >
+        <h1>Speakers</h1>
+        <input type="button" value="Add to Cart" id="3">
+    </div>
+    <div class="course alt">
+        <img src="https://rukminim1.flixcart.com/image/400/400/calculator/r/p/j/casio-fx-991-ex-casio-fx-991ex-original-imae98wuvjsu62zm.jpeg?q=70" >
+        <h1>Casio Calculator</h1>
+        <input type="button" value="Add to Cart" id="3">
+    </div>
+    <div class="course">
+        <img src="https://rukminim1.flixcart.com/image/400/400/computer/n/p/r/acer-2-in-1-laptop-original-imaerc57vszt5zqe.jpeg?q=70" >
+        <h1>Acer Computer</h1>
+        <input type="button" value="Add to Cart" id="4">
+    </div>
+    <div class="course alt">
+        <img src="https://rukminim1.flixcart.com/merch/400/400/images/1476258230154.jpg?q=70" >
+        <h1>Firefox Cycle</h1>
+        <input type="button" value="Add to Cart" id="5">
+    </div>
+    <div class="course">
+        <img src="https://rukminim1.flixcart.com/image/400/400/book/9/8/9/fantastic-beasts-and-where-to-find-them-the-original-screenplay-1100x1100-imaemhf4rspqdp4y.jpeg?q=70" >
+        <h1>Fantastic Beasts Book</h1>
+        <input type="button" value="Add to Cart" id="6">
+    </div>
+    <div class="course alt">
+        <img src="https://rukminim1.flixcart.com/image/400/400/watch/z/j/y/ps754g-2-lee-cooper-original-imaezfg8qgd8gmmv.jpeg?q=70" >
+        <h1>Lee Cooper Wrist Watch</h1>
+        <input type="button" value="Add to Cart" id="7">
+    </div>
+</div>
+
+
+
+</body>
+</html>

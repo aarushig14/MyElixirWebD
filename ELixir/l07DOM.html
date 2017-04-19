@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <script>
+        //declared not called (down)
+        window.onload= function () {   //onload jbtl domtree nhi bnega tb tk function nhi chalega
+            element = document.getElementById("div1");
+            console.log(element);   // gave null without function
+        }
+
+        element = document.getElementById("div1");
+        console.log("element is " + element);
+
+    </script>
+</head>
+<body>
+<div id="div1">
+    <div id="div2"></div>
+</div>
+
+</body>
+</html>

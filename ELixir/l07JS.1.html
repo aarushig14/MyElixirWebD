@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+//    fun1();   //error
+//    fun2();   //error
+    funny1();   // executed as complete function is hoisted
+    funny2();
+
+//console.log(a);    // undefined
+//console.log(fun1);  // undefined
+//console.log(fun1()); //undefined() --> error
+    var fun1=function () {
+        console.log("fun1");
+//        function fun3() {     // or var fun3 = function(){}  LOCAL and NOT GLOBAL
+//            console.log("fun3");
+//        }
+//        fun3();       // executed
+    }
+//    fun3(); // fun3 local function --> will not work
+    var a=10;
+    var fun2=function () {
+        console.log("fun2");
+    }
+    function funny1(){
+        console.log("funny1");
+    }
+    function funny2(){
+        console.log("funny2");
+    }
+
+</script>
+<body>
+
+</body>
+</html>

@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Title</title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Macondo|Ubuntu|Orbitron|Concert+One" rel="stylesheet">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script><script src="collapse.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style>
+        .text {
+            font-family: 'Ubuntu', cursive;
+            color: white;
+            font-size: 40px;
+        }
+
+        .carousel-inner > .item > img,
+        .carousel-inner > .item > a > img {
+            width: 100%;
+            max-height: 80vh;
+            margin: auto;
+        }
+
+        .image{
+            min-width: 70%;
+            min-height: 70%;
+            opacity: 0.8;
+            object-fit: cover;
+        }
+
+        .item{
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            object-fit: contain;
+        }
+
+
+        @media screen and (max-width: 1200px){
+            input{
+                    max-width: 300px;
+                    max-height: 20px;
+                    padding: 0px;
+                }
+            text{
+                font-size: 8px;
+            }
+            item{
+                max-height: 100%;
+            }
+        }
+
+        @media screen and (max-height: 500px) {
+            /*input{*/
+                /*max-width: 300px;*/
+                /*max-height: 15px;*/
+                /*padding: 0px;*/
+            /*}*/
+            h1.text{
+                display: none;
+            }
+        }
+
+        div.form-group {
+            top: 10%;
+            margin-top: 50px;
+            position:absolute;
+            z-index:1;
+            width: 100%;
+        }
+
+        .shadow{
+            box-shadow: 3px 3px 5px 4px #696969;
+        }
+
+        .shadow:hover{
+            box-shadow: 3px 0px 8px 2px;
+        }
+
+        .shadow-btn:hover{
+            box-shadow: 0 8px 16px 5px rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+        }
+    </style>
+</head>
+
+<!--body-->
+<body class="scroll-assist">
+
+<!-- NAVIGATION BAR -->
+<div class="row">
+    <!--NAVIGATION-->
+<nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <a class="navbar-brand navbar-left" href="http://cb.lk">
+                <img alt="Brand" style="max-height: 35px" src="data:image/jpeg;base64,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">
+            </a>
+        </div>
+        <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+                <li><a href="#">Link</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Action</a></li>
+                        <li><a href="#">Another action</a></li>
+                        <li><a href="#">Something else here</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">Separated link</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#">One more separated link</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+</div>
+
+<!-- Image Slider -->
+<div class="container row" style="margin-top: 60px;margin-left:5px;width: 100%">
+
+    <!-- Form -->
+    <div class="row form-group">
+
+        <div class="col-lg-4" ></div>
+
+        <div class="col-lg-4 item">
+            <h1 class="text">CODING BLOCKS</h1>
+            <h1 class="text">URL Shortener</h1>
+            <input type="text" class="form-control shadow" placeholder="URL">
+            <div class="row" style="min-height: 10px"></div>
+            <input type="text" class="form-control shadow" placeholder="Custom Shortcut(Optional)">
+            <div class="row" style="min-height: 10px"></div>
+            <input type="text" class="form-control shadow" placeholder="Secret(needed to make custom)">
+            <div class="row" style="min-height: 10px"></div>
+            <input type="button" class="btn shadow-btn" style="border-radius:0px;background-color: #ff113b;color: white" value="Shorten">
+        </div>
+
+        <div class="col-lg-4" ></div>
+
+    </div>
+
+    <!-- Coursel -->
+    <div id="MyCarousel" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+            <li data-target="#MyCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#MyCarousel" data-slide-to="1" class="active"></li>
+            <li data-target="#MyCarousel" data-slide-to="2" class="active"></li>
+            <li data-target="#MyCarousel" data-slide-to="3" class="active"></li>
+        </ol>
+
+        <!-- Wrapper for Slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item active">
+                <img src="cb1.jpg" class="image" alt="cb1">
+            </div>
+            <div class="item">
+                <img src="cb2.jpg" alt="cb2" class="image">
+            </div>
+            <div class="item">
+                <img src="cb3.jpg" alt="cb3" class="image">
+            </div>
+            <div class="item">
+                <img src="cb4.jpg" class="image"  alt="cb4">
+            </div>
+        </div>
+
+        <!-- Left and Right controls -->
+        <a class="left carousel-control" href="#MyCarousel" role="button" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#MyCarousel" role="button" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+
+
+    </div>
+</div>
+
+
+</body>
+</html>

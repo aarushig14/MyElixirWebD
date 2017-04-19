@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+
+        window.onload = function () {
+            var input = document.getElementById('in');
+        }
+        var input;
+        function add() {
+            input = document.getElementById('in');
+            var task = input.value;
+            console.log(task);
+//            if(task == "" || task == "Enter some value" ){
+//                input.value = "Enter some value";
+//            }else {
+            var dv = document.getElementById("body");
+            dv.innerHTML += "<div >" + task + "</div>";
+            console.log(dv);
+            input.value = "";
+//            }
+        }
+
+        function strike(element) {
+            element.style.textDecoration = "line-through";
+        }
+
+        function handle(e) {
+            var button = document.getElementById("btn");
+            var input = document.getElementById("in");
+            if (e.keyCode === 13) {
+                add();
+            }
+        }
+
+
+    </script>
+</head>
+<body id="body">
+
+<input id="in" type="text" onkeypress="handle(event)">
+<input id = "btn" type="button" value="Add to List" onclick="add()">
+<div id="div">
+
+</div>
+
+
+</body>
+</html>

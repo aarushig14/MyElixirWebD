@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+//        function fun() {
+//            console.log('hi')
+//            console.log(this);
+//            var fun1= function () {
+//                console.log(this);
+//            }
+//            fun1()
+//        }
+//        fun()
+
+//        obj = {a:fun}
+//        obj.a();
+//        var fun2= function(){
+//            fun();
+//        }
+//        fun2()
+
+
+
+    function fun() {
+        console.log('hi')
+        console.log(this);
+        this.b="hello";
+    }
+    var a = new fun();   // new ek object bnayega a, aur fir fun() call krega
+
+        function student(name,age,fun) {
+            this.name = name;
+            this.age = age;
+            this.fun = fun;
+        }
+
+        var stu1 =new student("aarushi",20);
+
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

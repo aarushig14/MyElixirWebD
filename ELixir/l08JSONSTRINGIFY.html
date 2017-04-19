@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script>
+        obj = {}
+        obj.a = "vaevcqdvq"
+        obj.b=10
+        obj.c=true
+        obj.d={f:"hello"}
+        obj.e=function () {
+            console.log("i am a function")
+        }
+        obj.e=obj.e.toString()
+        console.log(obj)
+        str=JSON.stringify(obj)
+        console.log(str)
+        objagain = JSON.parse(str);
+        console.log(objagain);
+        objagain.e = eval("("+objagain.e+")");
+        console.log(objagain)
+
+
+        //function lost above
+
+//        s = (obj.e).toString();
+//        console.log(s);
+//        st=JSON.stringify(obj)
+//        console.log(st)
+//        obj2 = JSON.parse(st);
+//        console.log(obj2)
+    </script>
+</head>
+<body>
+
+</body>
+</html>

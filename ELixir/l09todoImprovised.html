@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        li:hover {
+            font-style: italic;
+        }
+    </style>
+    <script>
+        todolist = JSON.parse(localStorage.getItem("todos"));
+        if(!todolist){
+            todolist = [];
+            localStorage.setItem("todos",JSON.stringify(todolist));
+        }
+        window.onload=function(){
+            refreshview();
+            var input = document.getElementById('in');
+            var addbtn = document.getElementById('btn');
+            var clrbtn = document.getElementById('clearbtn');
+            var list = document.getElementById('list');
+            var clrAll = document.getElementById('clearAll');
+            addbtn.onclick=function () {
+                var val = input.value;
+                addit(val);                //onclick ke paas inputki acces hai and on click
+                                        // pr addit register hai to input addit me bhi accessible ho gya
+                refreshview();
+            }
+            clrbtn.onclick=function () {
+                clearit();
+                refreshview();
+            }
+            clrAll.onclick=function () {
+                clearAll();
+                refreshview();
+            }
+
+        }
+        var clearAll=function(){
+            todolist = JSON.parse(localStorage.getItem("todos"));
+            for(var i=0;i<todolist.length;){
+                    todolist.splice(i, 1);
+            }
+            localStorage.setItem('todos',JSON.stringify(todolist));
+        }
+        var clearit=function(){
+            todolist = JSON.parse(localStorage.getItem("todos"));
+            var st = todolist.length;
+            for(var i=0;i<todolist.length;i++){
+                if (todolist[i].done == true) {
+                    todolist.splice(i, 1);
+                    i--;
+                }
+            }
+            if(todolist.length==st){
+                window.alert("None of the tasks were complete");
+            }
+            localStorage.setItem('todos',JSON.stringify(todolist));
+        }
+        var addit = function(val){
+            var todoobj = {
+                todoval : val,
+                done:false
+            }
+            todolist.push(todoobj);
+            localStorage.setItem('todos',JSON.stringify(todolist));
+        }
+        var refreshview=function(){
+            todolist = JSON.parse(localStorage.getItem('todos'));
+            var string="";
+            for(var i=0;i<todolist.length;i++){
+                var obj = todolist[i]
+                string+="<li id ='"+i+"'><input class='check' type='checkbox' "+ (obj.done?"checked" : "") +" onchange='setDone(this)'><span style='text-decoration:"+(obj.done?"line-through":" ")+"'>"+obj.todoval+"</span><input type='button' value='DONE' onclick='removeObject("+i+")'></li>"
+            }
+            list.innerHTML = string;
+        }
+
+        var setDone = function (e) {
+            var parentId = e.parentNode.id;
+            todolist[parentId].done=!todolist[parentId].done;
+            localStorage.setItem('todos',JSON.stringify(todolist));
+            refreshview();
+        }
+
+        var removeObject=function(i){
+            todolist = JSON.parse(localStorage.getItem('todos'));
+            if(todolist[i].done==true) {
+                todolist.splice(i, 1);
+                localStorage.setItem('todos',JSON.stringify(todolist));
+                refreshview();
+            }else{
+                window.alert("This task is not striked through");
+            }
+        }
+        var handle = function(e){
+            var button = document.getElementById("btn");
+            var input = document.getElementById("in");
+
+//            if(e.keyCode === 8){
+//                input.value="";
+//            }else
+            if(e.keyCode === 13){
+                button.onclick()
+                input.value = "";
+            }
+        }
+
+    </script>
+</head>
+<body>
+<input id="in" type="text" onkeypress="handle(event)">
+<input id = "btn" type="button" value="Add to List">
+<input id = "clearbtn" type="button" value="Clear Done Tasks">
+<ul id="list">
+    <div id="div1">
+    </div>
+</ul>
+<br>
+<input type = "button" value = "ClearAll" id="clearAll">
+</body>
+</html>
